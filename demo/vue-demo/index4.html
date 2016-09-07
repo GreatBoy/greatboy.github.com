@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>前端观察</title>
+        <meta name="description" content="专注于网站前端设计与开发" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="MobileOptimized" content="320">
+        <script type="text/javascript" src="vue.js"></script>
+    </head>
+    <body>
+        <div id="test-container" v-on:click="clickTest">
+            <div>
+                Hello {{msg}}
+            </div>
+            <div>
+                <div v-for="item in list">
+                    {{item.name}}
+                </div>
+            </div>
+        </div>
+        <script>
+            var data =  {
+                msg:'Great Boy',
+                list: [{
+                    name:'张三'
+                },{
+                    name:'李四'
+                },{
+                    name:'王五'
+                }]
+            }
+            var test = new Vue({
+                el:'#test-container',
+                data:data,
+                methods: {
+                    clickTest: function(e){
+                        console.dir(e);
+                        data.push(data.list.push({'name':'周六'}));
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>前端观察</title>
+		<meta name="description" content="专注于网站前端设计与开发" />
+		<meta name="HandheldFriendly" content="True" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="MobileOptimized" content="320">
+		<script type="text/javascript" src="vue.js"></script>
+	</head>
+	<body>
+        <section>
+            <h2>watch Demo</h2>
+            <div id="test-container">
+                <div>
+                    Hello {{fullName}}
+                </div>
+                firstName<input v-model="firstName"/>
+                lastName<input v-model="lastName"/>
+            </div>
+        </section>
+		<script>
+			var vm = new Vue({
+				el:'#test-container',
+				data:{
+					msg:'Great Boy',
+                    firstName: 'Great',
+                    lastName:'Boy',
+                    fullName: 'Great Boy'
+				}
+			})
+            
+            vm.$watch('firstName', function(val){
+                this.fullName = val + ' ' + this.lastName;
+            });
+            
+            vm.$watch('lastName', function(val){
+                this.fullName =  this.firstName  + ' ' + val;
+            });
+            
+		</script>
+        
+        
+        
+        
+        
+        <section>
+            <h2>computed Demo</h2>
+            <div id="computed-container">
+                <div>
+                    Hello {{fullName}}
+                </div>
+                firstName<input v-model="firstName"/>
+                lastName<input v-model="lastName"/>
+            </div>
+        </section>
+		<script>
+			var vm = new Vue({
+				el:'#computed-container',
+				data:{
+					msg:'Great Boy',
+                    firstName: 'Great',
+                    lastName:'Boy',
+                    fullName: 'Great Boy'
+				},
+                computed: {
+                    fullName: function () {
+                      return this.firstName + ' ' + this.lastName
+                    }
+                }
+			})
+		</script>
+        
+        
+        
+        
+        <section>
+            <h2>setter getter Demo</h2>
+            <div id="setter-container">
+                <div>
+                    Hello {{fullName}}
+                </div>
+                firstName<input v-model="firstName"/>
+                lastName<input v-model="lastName"/>
+            </div>
+        </section>
+		<script>
+			var vm = new Vue({
+				el:'#setter-container',
+				data:{
+					msg:'Great Boy',
+                    firstName: 'Great',
+                    lastName:'Boy',
+                    fullName: 'Great Boy'
+				},
+                computed: {
+                    fullName: {
+                        // getter
+                        get: function () {
+                          return this.firstName + ' ddd' + this.lastName
+                        },
+                        // setter
+                        set: function (newValue) {
+                          var names = newValue.split(' ')
+                          this.firstName = names[0]
+                          this.lastName = names[names.length - 1]
+                        }
+                    }
+                }
+			})
+		</script>
+        
+	</body>
+</html>

@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>前端观察</title>
+		<meta name="description" content="专注于网站前端设计与开发" />
+		<meta name="HandheldFriendly" content="True" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="MobileOptimized" content="320">
+		<script type="text/javascript" src="vue.js"></script>
+	</head>
+	<body>
+        
+        <h3>v-if例子</h3>
+        <div id="if-demo">
+            <p v-if="hello">是</p>
+            <p v-else>否<p>
+            <p v-if="test1 == 1">1</p>
+            <p v-else>3</p>
+            <p v-show="test1 == 2">1</p>
+        </div>
+        <script>
+            new Vue({
+                el:'#if-demo',
+                data:{
+                    hello: true,
+                    test1:'1',
+                    test2:'2'
+                }
+            })
+        </script>
+        
+        <h3>v-for例子</h3>
+        <div id="for-demo">
+            <ul v-for="item in list">
+                <li>
+                    <div>书名:{{item.title}}</div>
+                    <div>价格:{{item.price}}</div>
+                </li>
+            </ul>
+        </div>
+        <script>
+            new Vue({
+                el:'#for-demo',
+                data:{
+                    list:[{
+                       title:'javascript设计模式',
+                       price: 12
+                    },{
+                       title:'javascript高级开发',
+                       price: 20
+                    },{
+                       title:'javascript算法与数据结构',
+                       price: 40
+                    },{
+                       title:'javascript王者归来',
+                       price: 100
+                    }]
+                }
+            })
+        </script>
+        
+        <h3>v-bind和v-on例子</h3>
+        <div id="bind-demo">
+            <a v-bind:href="url">v-bind href</a>
+            <a v-bind:test="url">v-bind test</a>
+            <div v-on:click="clickTest">v-on绑定</div>
+        </div>
+        <script>
+            new Vue({
+                el:'#bind-demo',
+                data:{
+                    url:'http://www.baidu.com',
+                },
+                methods:{
+                    clickTest: function(){
+                        alert('点击测试')
+                    }
+                }
+            })
+        </script>
+        
+        
+        <h3>阻止事件冒泡</h3>
+        <div id="maopao-demo">
+            <div v-on:click="clickParent">
+                <div v-on:click.stop="clickSon">阻止冒泡</div>
+            </div>
+            <div v-on:click="clickParent">
+                <div v-on:click="clickSon">非阻止冒泡</div>
+            </div>
+        </div>
+        <script>
+            new Vue({
+                el:'#maopao-demo',
+                data:{
+                    url:'http://www.baidu.com',
+                },
+                methods:{
+                    clickParent: function(){
+                        alert('点击父节点')
+                    },
+                    clickSon: function(){
+                        alert('点击子节点');
+                    }
+                }
+            })
+        </script>
+        
+        
+        
+        
+        <h3>v-bind class写法</h3>
+        <style>
+            .classA{
+                background: blue;
+            }
+            .classB{
+                background: yellow;
+            }
+        </style>
+        <div id="bindclass-demo">
+            <div class="static" v-bind:class="{ 'class-a': isA, 'class-b': isB }">样式A</div>
+
+            <div class="static" v-bind:class="[classA, classB]">数组样式</div>
+            
+            <div class="static" v-bind:class="[classA, isB ? classB : '']">三元表达式</div>
+            
+            <div class="static" v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">内联写法</div>
+            
+        </div>
+        <script>
+            new Vue({
+                el:'#bindclass-demo',
+                data:{
+                    isA: true,
+                    isB: false,
+                    classA:'classA',
+                    classB: 'classB',
+                    activeColor: 'red',
+                    fontSize: 30
+                }
+            })
+        </script>
+        
+        
+        
+        <h3>自定义指令</h3>
+        <div id="custom-demo">
+            <div v-my-directive="someValue">{{res}}</div>
+        </div>
+        <script>
+            Vue.directive('my-directive', {
+                bind: function () {
+                  // 准备工作
+                  // 例如，添加事件处理器或只需要运行一次的高耗任务
+                },
+                update: function (newValue, oldValue) {
+                  // 值更新时的工作
+                  // 也会以初始值为参数调用一次
+                  debugger;
+                   this.vm.res = newValue + oldValue;
+                },
+                unbind: function () {
+                  // 清理工作
+                  // 例如，删除 bind() 添加的事件监听器
+                }
+            })
+            
+            var vm = new Vue({
+                el:'#custom-demo',
+                data:{
+                    someValue:'123',
+                    res:''
+                }
+            });
+            
+        </script>
+        
+	</body>
+</html>
+
+
+
