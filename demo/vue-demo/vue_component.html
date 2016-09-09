@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>前端观察</title>
+        <meta name="description" content="专注于网站前端设计与开发" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="MobileOptimized" content="320">
+        <script type="text/javascript" src="vue.js"></script>
+    </head>
+    <body>
+        <div id="test-container">
+            Hello {{msg}}
+
+            <my-component></my-component>
+            <my-component1></my-component1>
+        </div>
+        <template id="component-1">
+            <div>我是一个自定义的组件dddddddddddddddddddd</div>
+        </template>
+        <script>
+        var MyComponent = Vue.extend({
+            template: '#component-1'
+        });
+        // 全局注册组件，tag 为 my-component
+        Vue.component('my-component', MyComponent);
+
+
+        var MyComponent1 = Vue.extend({
+            template: '<div>我是一个自定义的组件1,我的模板文件在html里面哦</div>'
+        });
+        // 全局注册组件，tag 为 my-component
+        Vue.component('my-component1', MyComponent1);
+
+        new Vue({
+            el: '#test-container',
+            data: {
+                msg: 'Great Boy'
+            }
+        })
+        </script>
+
+    <hr/>
+
+
+
+
+    <h2>组件props 传值</h2>
+    <div id="props-container">
+        Hello {{msg}}
+        <my-component2 msg='[{"name":"测试一"},{"name":"测试二"}]' title="title值"></my-component2>
+    </div>
+
+    <template id="component-2">
+        <div>我是一个自定义的组件,传过来的值是{{title}}</div>
+        <ul>
+            <li v-for='item in msg|jsonParse'>{{item.name}}</li>
+        </ul>
+    </template>
+
+    <script>
+        Vue.filter('jsonParse', function(value) {
+            return JSON.parse(value);
+        });
+
+        var MyComponent2 = Vue.extend({
+            props: ['msg', 'title'],
+            template: '#component-2'
+        });
+
+        // 全局注册组件，tag 为 my-component
+        Vue.component('my-component2', MyComponent2);
+
+
+        new Vue({
+            el: '#props-container',
+            data: {
+            }
+        })
+    </script>
+</body>
+</html>
