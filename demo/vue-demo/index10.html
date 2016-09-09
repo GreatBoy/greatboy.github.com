@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<div id="test-container">
-			Hello {{msg}}
+            <my-component></my-component>
 		</div>
 		<script>
 			new Vue({
@@ -22,6 +22,20 @@
 					msg:'Great Boy'
 				}
 			})
+            
+            // 定义
+            var MyComponent = Vue.extend({
+                template: '<div>A custom component!</div>'
+              })
+
+              // 注册
+              Vue.component('my-component', MyComponent)
+
+              // 创建根实例
+              new Vue({
+                el: '#test-container'
+              })
+              
 		</script>
 	</body>
 </html>

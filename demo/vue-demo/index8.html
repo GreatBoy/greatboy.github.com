@@ -12,16 +12,119 @@
 		<script type="text/javascript" src="vue.js"></script>
 	</head>
 	<body>
-		<div id="test-container">
-			Hello {{msg}}
-		</div>
-		<script>
-			new Vue({
-				el:'#test-container',
-				data:{
-					msg:'Great Boy'
-				}
-			})
-		</script>
+        <h2>Text</h2>
+        <div id="Text-demo">
+            <span>My Name Is {{myname}}</span>
+            <br>
+            <input  type="text" v-model="myname" placeholder="Edit My Name">
+        </div>
+        <script>
+            new Vue({
+                el:'#Text-demo',
+                data:{
+                    msg:'Great Boy'
+                }
+            })
+        </script>
+        
+        
+        <h2>Textarea</h2>
+        <div id="Textarea-demo">
+            <span>My Name Is {{myname}}</span>
+            <br>
+            <textarea v-model="myname" placeholder="Edit My Name"></textarea>
+        </div>
+        <script>
+            new Vue({
+                el:'#Textarea-demo',
+                data:{
+                    msg:'Great Boy'
+                }
+            })
+        </script>
+        
+        
+        <h2>Checkbox</h2>
+        <div id="Checkbox-demo">
+            <input type="checkbox" id="checkbox" v-model="checked"><label for="checkbox">{{ checked }}</label>
+            
+            <input type="checkbox" id="checkbox-2" v-model="checked2"><label for="checkbox-2">{{ checked2 }}</label>
+        </div>
+        <script>
+            new Vue({
+                el:'#Checkbox-demo',
+                data:{
+                    checked: true,
+                    checked2: false
+                }
+            })
+        </script>
+        
+   
+        
+        
+        
+        
+        <h2>Radio</h2>
+        <div id="Radio-demo">
+            <input type="radio" id="one" value="One" v-model="picked">
+            <label for="one">One</label>
+            <br>
+            <input type="radio" id="two" value="Two" v-model="picked">
+            <label for="two">Two</label>
+            <br>
+            <span>Picked: {{ picked }}</span>
+        </div>
+        <script>
+            new Vue({
+                el:'#Radio-demo',
+                data:{
+                    picked: true
+                }
+            })
+        </script>
+        
+        
+        
+        <h2>Select</h2>
+        <div id="Select-demo">
+            <select v-model="selected">
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+              <span>Selected: {{ selected }}</span>
+        </div>
+        <script>
+            new Vue({
+                el:'#Select-demo',
+                data:{
+                    selected: 'B'
+                }
+            })
+        </script>
+        
+        <h2>Select-More</h2>
+        <div id="Select-More-demo">
+            <select v-model="selected" multiple>
+                <option selected>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+            <br>
+            <span>Selected: {{ selected | json }}</span>
+        </div>
+        <script>
+            new Vue({
+                el:'#Select-More-demo',
+                data:{
+                    selected: 'B'
+                }
+            })
+          
+        </script>
+        
 	</body>
 </html>
+
+
