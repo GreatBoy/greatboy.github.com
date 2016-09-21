@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://greatboy.github.io/2016/09/11/webpack/</loc>
+    
+    <lastmod>2016-09-21T03:38:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://greatboy.github.io/2016/04/18/vue-build/</loc>
     
-    <lastmod>2016-09-09T09:44:18.000Z</lastmod>
+    <lastmod>2016-09-20T01:18:20.000Z</lastmod>
     
   </url>
   
